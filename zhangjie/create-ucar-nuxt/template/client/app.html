@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" {{ HTML_ATTRS }}>
+  <head {{ HEAD_ATTRS }}>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1" />
+    <meta name="renderer" content="webkit" />
+    <!-- <link rel="dns-prefetch" href="//static.maimaiche.com" /> -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+    <!-- <script src="//res.wx.qq.com/open/js/jweixin-1.4.0.js"></script> -->
+    {{ HEAD }}
+  </head>
+  <body {{ BODY_ATTRS }}>
+    <script>
+      !(function() {
+        // https://codepen.io/Mamboleoo/post/scrollbars-and-css-custom-properties
+        // window 系统滚动条会占据视口宽度而 vw 单位没有将滚动条算在内, 所以当设置 100vw 时, 如果刚好又有竖向滚动条, 这时就会产生一个横向滚动条;
+        if (window.navigator.userAgent.toLowerCase().indexOf('windows nt') !== -1) {
+          var outerWidth = window.document.createElement('div');
+          var innerWidth = window.document.createElement('div');
+
+          outerWidth.style.overflow = 'scroll';
+          outerWidth.appendChild(innerWidth);
+          window.document.body.appendChild(outerWidth);
+
+          var width = outerWidth.offsetWidth - innerWidth.offsetWidth;
+
+          window.document.documentElement.style.setProperty('--scrollbar', `${width}px`);
+          window.document.body.removeChild(outerWidth);
+        }
+
+      })();
+    </script>
+    {{ APP }}
+  </body>
+</html>

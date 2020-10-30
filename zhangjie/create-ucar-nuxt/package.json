@@ -1,0 +1,22 @@
+{
+  "name": "@ucarinc/create-ucar-nuxt",
+  "version": "2.0.0-beta3",
+  "description": "基于 Vue 服务端渲染框架 Nuxt 搭建的脚手架, 包含 ucar proxy 的加解密处理; 开箱即用",
+  "main": "index.js",
+  "bin": {
+    "create-ucar-nuxt": "bin/create-ucar-nuxt.js"
+  },
+  "repository": {
+    "type": "gitlab",
+    "url": "https://gitlab.10101111.com/AmoyFE/create-ucar-nuxt"
+  },
+  "author": "Jie.zhang<jie.zhang17@ucarinc.com>",
+  "license": "MIT",
+  "dependencies": {
+    "cac": "^6.5.3",
+    "chalk": "^2.4.2",
+    "envinfo": "^7.4.0",
+    "ip": "^1.1.5",
+    "sao": "^1.6.1"
+  }
+}

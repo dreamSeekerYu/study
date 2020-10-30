@@ -1,0 +1,45 @@
+{
+  "name": "<%= name %>",
+  "version": "1.0.0",
+  "description": "<%= description %>",
+  "keywords": ["nuxt", "vue", "axios", "usop"],
+  "author": "<%= author %>",
+  "repository": {
+    "type": "gitlab",
+    "url": "https://gitlab.10101111.com/AmoyFE/create-ucar-nuxt"
+  },
+  "private": true,
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development nodemon server/index.js --watch server",
+    "build": "nuxt build && node jenkins.config.js",
+    "start": "nuxt start"
+  },
+  "dependencies": {
+    <%_ if (jsbridge === 'Y') { _%>
+    "@ucarinc/ucar-lib-jsbridge": "0.0.36",
+    <%_ } _%>
+    "@ucarinc/ucar-sign": "0.0.2",
+    "axios": "^0.19.2",
+    "koa": "^2.13.0",
+    "koa-body": "^4.2.0",
+    "koa-router": "^9.1.0",
+    "koa-session": "^6.0.0",
+    "log4js": "^6.3.0",
+    "needle": "^2.5.0",
+    "nuxt": "^2.14.1"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "less": "^3.12.2",
+    "less-loader": "^6.2.0",
+    "cross-env": "^7.0.2",
+    "eslint": "^7.6.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-nuxt": "^1.0.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "fs-extra": "^9.0.1",
+    "nodemon": "^2.0.4",
+    "postcss-px-to-viewport": "^1.1.1",
+    "prettier": "^2.0.5"
+  }
+}

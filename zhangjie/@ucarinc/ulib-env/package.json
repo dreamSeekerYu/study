@@ -1,0 +1,64 @@
+{
+  "_from": "@ucarinc/ulib-env",
+  "_id": "@ucarinc/ulib-env@0.0.6",
+  "_inBundle": false,
+  "_integrity": "sha512-ojRBP63MmyM5qMZojBUXtEFqb8WXQjQATMKKJhd3fwBRvoyLMeiPDECQtaTTBFfzRUmZE5zqzQ2O0UbVsK7x0g==",
+  "_location": "/@ucarinc/ulib-env",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "@ucarinc/ulib-env",
+    "name": "@ucarinc/ulib-env",
+    "escapedName": "@ucarinc%2fulib-env",
+    "scope": "@ucarinc",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://unpm.10101111.com:443/@ucarinc%2fulib-env/-/ulib-env-0.0.6.tgz",
+  "_shasum": "4f5020664986df05fd3f3a9dffbce99638484e12",
+  "_spec": "@ucarinc/ulib-env",
+  "_where": "D:\\study\\study\\zhangjie",
+  "author": {
+    "name": "ying.li14@ucarinc.com"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "环境检测基础库",
+  "devDependencies": {
+    "rollup": "^1.27.2",
+    "typescript": "^3.7.2"
+  },
+  "files": [
+    "dist",
+    "lib",
+    "es",
+    "src"
+  ],
+  "homepage": "",
+  "license": "ISC",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "name": "@ucarinc/ulib-env",
+  "publishConfig": {
+    "registry": "https://registry.npm.taobao.org/"
+  },
+  "repository": {
+    "url": "https://gitlab.10101111.com/ucarfe_lib/react-mui"
+  },
+  "scripts": {
+    "build": "npm run build:types && rollup -c=../../rollup.config.js",
+    "build:types": "tsc --emitDeclarationOnly",
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "npm run type-check -- --watch"
+  },
+  "types": "lib/index.d.ts",
+  "unpkg": "dist/index.js",
+  "version": "0.0.6"
+}

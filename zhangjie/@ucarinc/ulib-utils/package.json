@@ -1,0 +1,68 @@
+{
+  "_from": "@ucarinc/ulib-utils",
+  "_id": "@ucarinc/ulib-utils@0.0.8",
+  "_inBundle": false,
+  "_integrity": "sha512-7LB4F9/OQxwZlZN+zQwlS3nF2iAMJ05pYjP8NGi5t6iQEhl46+pal6WtY+T8grPjPg8hGCFSBoY5aaEytlyxMA==",
+  "_location": "/@ucarinc/ulib-utils",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "@ucarinc/ulib-utils",
+    "name": "@ucarinc/ulib-utils",
+    "escapedName": "@ucarinc%2fulib-utils",
+    "scope": "@ucarinc",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://unpm.10101111.com:443/@ucarinc%2fulib-utils/-/ulib-utils-0.0.8.tgz",
+  "_shasum": "78bd729be4706305f15545ccc62f5c9588cd6f6f",
+  "_spec": "@ucarinc/ulib-utils",
+  "_where": "D:\\study\\study\\zhangjie",
+  "author": {
+    "name": "ying.li14@ucarinc.com"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "js-base64": "^2.5.1"
+  },
+  "deprecated": false,
+  "description": "基础工具包",
+  "devDependencies": {
+    "@types/js-base64": "^2.3.1",
+    "rollup": "^1.27.2",
+    "typescript": "^3.7.2"
+  },
+  "files": [
+    "dist",
+    "lib",
+    "es",
+    "src"
+  ],
+  "homepage": "",
+  "license": "ISC",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "name": "@ucarinc/ulib-utils",
+  "publishConfig": {
+    "registry": "https://registry.npm.taobao.org/"
+  },
+  "repository": {
+    "url": "https://gitlab.10101111.com/ucarfe_lib/react-mui"
+  },
+  "scripts": {
+    "build": "npm run build:types && rollup -c=../../rollup.config.js",
+    "build:types": "tsc --emitDeclarationOnly",
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "npm run type-check -- --watch"
+  },
+  "types": "lib/index.d.ts",
+  "unpkg": "dist/index.js",
+  "version": "0.0.8"
+}
