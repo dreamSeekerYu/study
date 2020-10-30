@@ -1,0 +1,31 @@
+{
+  "name": "web-report",
+  "browser_action": {
+    "default_popup": "./index.html",
+    "default_icon": "./img/logo.jpg"
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+F",
+        "mac": "MacCtrl+Shift+F"
+      },
+      "description": "Opens hello.html"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "./js/zdata.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "description": "web-report",
+  "version": "1.0",
+  "manifest_version": 2
+}

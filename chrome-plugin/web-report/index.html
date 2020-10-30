@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <link rel="icon" href="./img/logo.jpg"> -->
+  <link rel="stylesheet" href="./css/index.css">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="warpper">
+    <button onclick="handleRecommendArticle">
+      web-report-html
+    </button>
+    <p class="p">
+      <a href="https://www.jianshu.com/p/51c650f98d9c" target="_blank">谷歌(Chrome)浏览器插件开发教程</a> </p>
+  </div>
+  <script>
+    // 投稿按钮点击事件 
+    function handleRecommendArticle() {
+      let request;
+      request = ajax({
+        method: 'post',
+        url: 'https://XXX/api/post', // 后端接口 
+        data: {
+          'title': this.article.title,
+          'desc': this.article.description,
+          'category': this.article.category[1] || '默认分类',
+          'link': this.article.link,
+          'referrer': this.article.reporter
+        }
+      });
+    }
+
+  </script>
+</body>
+
+</html>
