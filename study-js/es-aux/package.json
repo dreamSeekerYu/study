@@ -1,0 +1,117 @@
+{
+  "name": "es-aux",
+  "version": "0.0.5",
+  "description": "JavaScript Functions and Helpers",
+  "main": "dist/es-aux.cjs.js",
+  "module": "dist/es-aux.esm.js",
+  "browser": "dist/es-aux.umd.js",
+  "unpkg": "dist/es-aux.umd.js",
+  "jsdelivr": "dist/es-aux.umd.js",
+  "types": "types/main.d.ts",
+  "scripts": {
+    "clean": "rimraf dist types lib coverage docs README.md",
+    "prebuild": "lint-staged && npm run test",
+    "build": "npm run clean && tsc --emitDeclarationOnly && rollup -c",
+    "postbuild": "node docs.js",
+    "build:watch": "rollup -cw",
+    "commit": "git-cz",
+    "commit:retry": "git-cz --retry",
+    "commit:noverify": "git-cz --no-verify",
+    "precommit": "lint-staged && npm run test",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "lint": "eslint src --ext .ts,.tsx",
+    "lint:fix": "eslint src --ext .ts,.tsx --fix",
+    "format": "prettier --write \"src/**/*.{js,ts}\"",
+    "release": "standard-version",
+    "push": "git push --follow-tags origin master"
+  },
+  "files": [
+    "src",
+    "types",
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/staven630/es-aux.git"
+  },
+  "keywords": [
+    "javascript",
+    "javascript helpers",
+    "js helper functions"
+  ],
+  "author": "staven <20287710@qq.com> (http://github.com/staven630)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/staven630/es-aux/issues"
+  },
+  "homepage": "https://github.com/staven630/es-aux#readme",
+  "devDependencies": {
+    "@commitlint/cli": "^8.1.0",
+    "@commitlint/config-conventional": "^8.1.0",
+    "@types/jest": "^24.0.18",
+    "@types/node": "^12.7.2",
+    "@typescript-eslint/eslint-plugin": "^2.0.0",
+    "@typescript-eslint/parser": "^2.0.0",
+    "@typescript-eslint/typescript-estree": "^2.0.0",
+    "commitizen": "^4.0.3",
+    "commitlint-config-cz": "^0.12.1",
+    "conventional-changelog": "^3.1.10",
+    "conventional-changelog-cli": "^2.0.23",
+    "cz-customizable": "^6.2.0",
+    "eslint": "^6.2.1",
+    "eslint-config-prettier": "^6.1.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "husky": "^3.0.4",
+    "jest": "^24.9.0",
+    "jsdoc-to-markdown": "^5.0.0",
+    "lint-staged": "^9.2.3",
+    "prettier": "^1.18.2",
+    "rimraf": "^3.0.0",
+    "rollup": "^1.20.0",
+    "rollup-plugin-banner": "^0.2.1",
+    "rollup-plugin-buble": "^0.19.8",
+    "rollup-plugin-commonjs": "^10.0.2",
+    "rollup-plugin-eslint": "^7.0.0",
+    "rollup-plugin-json": "^4.0.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-terser": "^5.1.1",
+    "rollup-plugin-typescript": "^1.0.1",
+    "standard-version": "^7.0.0",
+    "ts-jest": "^24.0.2",
+    "typescript": "^3.5.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run precommit",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.+(js|ts|tsx|md|css|sass|less|graphql|yml|yaml|scss|json|vue)": [
+      "npm run format",
+      "npm run lint:fix",
+      "git add"
+    ]
+  },
+  "jest": {
+    "verbose": true,
+    "testRegex": "/__tests__/.*\\.spec\\.tsx?$",
+    "testEnvironment": "node",
+    "collectCoverageFrom": [
+      "src/**/*.ts"
+    ],
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-customizable"
+    },
+    "cz-customizable": {
+      "config": "./.cz-config.js"
+    }
+  }
+}
