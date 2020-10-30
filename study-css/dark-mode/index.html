@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" id="html">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    html[theme='dark-mode'] {
+      filter: invert(1) hue-rotate(180deg);
+    }
+
+    /* 它还会反转应用程序中的所有图像。 因此，我们将对所有图像添加相同的规则，以逆转效果  */
+    html[theme='dark-mode'] img {
+      filter: invert(1) hue-rotate(180deg);
+    }
+
+    html {
+      transition: color 300ms, background-color 300ms;
+    }
+
+    div {
+      color: red;
+    }
+
+    html {
+      background: #cccccc;
+    }
+
+    img {
+      border-radius: 30px;
+    }
+  </style>
+</head>
+
+<body>
+  <button onclick="changeDarkmode()">click
+  </button>
+  <div>
+    爱手动阀健身房大
+  </div>
+  <img src="./c.jpg" alt="ss">
+
+  <script>
+    function changeDarkmode() {
+      const html = document.getElementById('html')
+      const theme = html.getAttribute('theme')
+      if (theme == 'dark-mode') {
+        html.removeAttribute('theme')
+      } else {
+        html.setAttribute('theme', 'dark-mode')
+      }
+    }
+  </script>
+</body>
+
+</html>

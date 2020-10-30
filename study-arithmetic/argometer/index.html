@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <h4>二分法查找</h4>
+  <hr>
+  对比十万次计算结果 可以看到明显的性能差异(常规遍历与二分法查询)
+  <pre>
+      start1: 3.330078125ms
+      start2: 0.18701171875ms
+  </pre>
+  <hr>
+  对比一千万次计算结果 可以看到明显的性能差异(常规遍历与二分法查找)
+  <pre>
+    start1: 209.923095703125ms
+    start2: 0.248046875ms
+  </pre>
+
+</body>
+
+<script>
+  const a = new Array(11000000).fill(1).map((item, i) => i)
+  const timeLog1 = 'start1'
+  const timeLog2 = 'start2'
+  const findNumber = 10000000
+
+  console.time(timeLog1)
+  a.forEach(item => {
+    if (item === findNumber) {
+      console.timeEnd(timeLog1)//: 3.6  ms
+    }
+  })
+  // 二分法查找
+  function indexOf(arr, target, start, end) {
+    start = start || 0;
+    end = end || arr.length - 1;
+    if (start > end) {
+      return -1;
+    }
+    let mid = Math.floor((start + end) / 2);
+    if (arr[mid] > target) {
+      end = mid - 1;
+      return indexOf(arr, target, start, end);
+    }
+    else if (arr[mid] < target) {
+      start = mid + 1;
+      return indexOf(arr, target, start, end);
+    }
+    else {
+      return mid;
+    }
+  }
+  // while 循环实现二分法查找
+  // function indexOf(arr, target, start, end) {
+  //   start = start || 0;
+  //   end = end || arr.length - 1;
+  //   let mid = Math.floor((start + end) / 2);
+  //   console.log(start, end);
+  //   while (start <= end) {
+  //     console.log(start, end, target, arr[mid]);
+  //     if (target > arr[mid]) {
+  //       start = mid + 1;
+  //       mid = Math.floor((start + end) / 2);
+  //     }
+  //     else if (target < arr[mid]) {
+  //       end = mid - 1;
+  //       mid = Math.floor((start + end) / 2);
+  //     }
+  //     else {
+  //       return mid;
+  //     }
+  //   }
+  //   console.log(start, end);
+  //   return -1;
+  // }
+  console.time(timeLog2)
+  console.log(indexOf(a, findNumber))
+  console.timeEnd(timeLog2)
+
+</script>
+
+</html>

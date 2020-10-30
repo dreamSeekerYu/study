@@ -1,0 +1,40 @@
+<template>
+  <div id="border-btn">
+    <button>Hover me</button>
+  </div>
+</template>
+
+<script>
+export default {}
+</script>
+
+<style lang="scss" scoped>
+#border-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+}
+
+button {
+  border: 0;
+  border-radius: 10px;
+  background: #2ec4b6;
+  text-transform: uppercase;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 15px 30px;
+  outline: none;
+  position: relative;
+  transition: border-radius 3s;
+  -webkit-transition: border-radius 3s;
+}
+
+button:hover {
+  border-bottom-right-radius: 50px;
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+</style>
