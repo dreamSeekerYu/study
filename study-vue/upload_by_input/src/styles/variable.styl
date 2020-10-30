@@ -1,0 +1,65 @@
+/**
+* 用于定于全局变量
+* 包括但不局限于 颜色 字号 边距 utils
+*/
+
+$ucar_main_color = #d9ab63; /* 主色：棕色 文字、背景色 */
+$ucar_main_button = #dbac6f; /* 按钮背景色 */
+$ucar_title_color = #deb682; /* 报名标题进度强调 */
+$ucar_assist_color = #a68f72; /* 浅主色文字 */
+$ucar_main_bg = #fff8ee; /* 浅主色背景色 */
+$ucar_main_border = #ffe6bd; /* 浅主色描边 */
+$ucar_light_border = #e6e6e6; /* 页面浅色描边 */
+$ucar_light_bg = #f9f9f9; /* 浅色背景色 */
+$ucar_body_bg = #f2f2f2; /* 页面背景色 */
+$ucar_dark_bg = #373635; /* 头部 和 navbar 深背景色 */
+$ucar_font_color = #333333; /* 默认文本颜色 */
+$ucar_alert_color = #666666; /* 弹窗 */
+$ucar_font_assist_color = #999999; /* 默认文本颜色 */
+$ucar_font_num = #cccccc; /* 报名标题阶段数字颜色 */
+$ucar_input_require_color = #FF6A5B; /* 必填项符号色 */
+$ucar_price_color = #d0964b; /* 价格与车辆类型色 */
+$ucar_label_color = #e60012; /* 标签颜色 */
+$ucar_success_color = #45b16b; /* 成功标识 */
+
+$ucar_font_huge = 72px;
+$ucar_font_big = 60px;
+$ucar_font_h1 = 46px;
+$ucar_font_h2 = 42px;
+$ucar_font_h3 = 40px;
+$ucar_font-h3-5 = 36px;
+$ucar_font_h4 = 32px;
+$ucar_font_h5 = 28px;
+$ucar_font_h6 = 26px;
+$ucar_font_min = 24px;
+$ucar_font_normal = 30px;
+$ucar_font_label = 20px;
+
+
+
+/* 页面距离两侧的边距 */
+$ucar_side_gutter = 30px;
+
+ucar-utils-clearfix() {
+  &::before,
+  &::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+}
+
+ucar-text-overflow() {
+  overflow: hidden;
+  width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+ucar-line-arrows(size = 12px) {
+  display: block;
+  width: size;
+  height: size;
+  transform: rotate(45deg);
+  transform-origin: size size;
+}
