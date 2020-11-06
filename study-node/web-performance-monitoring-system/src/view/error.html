@@ -1,0 +1,48 @@
+<%- include("./header.html") %>
+<%- include("./side.html") %>
+<!-- 样式 -->
+<link rel="stylesheet" href="/css/page.css">
+<link rel="stylesheet" href="/css/error.css">
+<div class="container ajax" id="ajax" v-cloak>
+   <div class="common-title">
+        <h1>WEB页面错误分析</h1>
+        <commonsearch :done="getinit"></commonsearch>
+    </div>
+    <div class="table-box common_page_style">
+        <div class="common-nav-table">
+            <li :class="{active:table==0}" @click="selectTab(0)">全部</li>
+            <li :class="{active:table==1}" @click="selectTab(1)">AJAX错误</li>
+            <li :class="{active:table==2}" @click="selectTab(2)">RESORUCE错误</li>
+            <li :class="{active:table==3}" @click="selectTab(3)">JS错误</li>
+        </div>
+        <div v-if="listdata.length">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="w-400">错误资源</th>
+                        <th>错误类型</th>
+                        <th>错误数量</th>
+                        <th>错误信息</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tr v-for="(item,index) in datalist" :key="index">
+                    <td><a href="javascript:" @click="gotodetail(item)">{{item.resourceUrl}}</a></td>
+                    <td class="tc">{{item.category}}</td>
+                    <td class="tc red">{{item.count}}</td>
+                    <td class="red">{{item.msg}}</td>
+                    <td class="tc"><a href="javascript:" @click="gotodetail(item)">查看详情</a></td> 
+                </tr>
+            </table>
+        </div>
+        <div v-if="!isLoadend" class="loading-block"></div>
+    </div>
+    <!--  分页 -->
+    <div class="tc common_page_style" v-show="isLoadend&&listdata.length">
+        <div id="copot-page" class="copot-page"></div>
+    </div>
+    <!-- 暂无数据 -->
+    <div class="tc" v-if="!listdata.length">暂无数据!</div>
+</div>
+<script src="/js/Page.js"></script>
+<script src="/js/view-error.js"></script>

@@ -1,0 +1,44 @@
+<%- include("./header.html") %>
+<%- include("./side.html") %>
+<!-- 样式 -->
+<link rel="stylesheet" href="/css/page.css">
+<link rel="stylesheet" href="/css/ajax.css">
+<div class="container ajax" id="pages" v-cloak>
+   <div class="common-title">
+        <h1 class="common-nav"><a href="/home/">首页</a>/<a href="/slowresources/">慢资源分类列表</a></h1>
+        <commonsearch :done="getinit"></commonsearch>
+    </div>
+    <div class="table-box common_page_style mt20">
+        <div v-if="listdata.length">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="w-400">AJAX URL</th>
+                        <th>请求方式</th>
+                        <th>调用量</th>
+                        <th>相应时间</th>
+                        <th>body数据大小</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tr v-for="(item,index) in listdata" :key="index">
+                    <td><a href="javascript:" @click="gotodetail(item)">{{item.name}}</a></td>
+                    <td class="tc">{{item.method}}</td>
+                    <td class="tc">{{item.count}}</td>
+                    <td class="tc red">{{item.duration|toFixed}}</td>
+                    <td class="tc">{{item.decodedBodySize|toSize}}</td>
+                    <td class="tc"><a href="javascript:" @click="gotodetail(item)">查看详情</a></td> 
+                </tr>
+            </table>
+        </div>
+        <div v-if="!isLoadend" class="loading-block"></div>
+    </div>
+    <!--  分页 -->
+    <div class="tc common_page_style" v-show="isLoadend&&listdata.length">
+        <div id="copot-page" class="copot-page"></div>
+    </div>
+    <!-- 暂无数据 -->
+    <div class="tc" v-if="!listdata.length">暂无数据!</div>
+</div>
+<script src="/js/Page.js"></script>
+<script src="/js/view-slowresources.js"></script>

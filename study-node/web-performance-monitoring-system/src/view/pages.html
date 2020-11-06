@@ -1,0 +1,58 @@
+<%- include("./header.html") %>
+<%- include("./side.html") %>
+<!-- 样式 -->
+<link rel="stylesheet" href="/css/page.css">
+<link rel="stylesheet" href="/css/ajax.css">
+<div class="container ajax" id="pages" v-cloak>
+   <div class="common-title">
+        <h1 class="common-nav"><a href="/home/">首页</a>/<a href="/pages/">列表</a></h1>
+        <commonsearch :done="getinit"></commonsearch>
+    </div>
+    <div class="table-box common-padding mt20">
+        <div v-if="listdata.length">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>URL</th>
+                        <th>调用次数</th>
+                        <th>页面加载时间</th>
+                        <th>白屏时间</th>
+                        <th>资源加载耗时</th>
+                        <th>DOM构建时间</th>
+                        <th>解析dom耗时</th>
+                        <th>DNS解析时间</th>
+                        <th>TCP连接时间</th>
+                        <th>页面重定向时间</th>
+                        <th>unload时间</th>
+                        <th>request请求耗时</th>
+                        <th>页面准备时间</th>
+                    </tr>
+                </thead>
+                <tr v-for="(item,index) in listdata" :key="index">
+                    <td><a href="javascript:" @click="gotodetail(item)">{{item.url}}</a></td>
+                    <td class="tc">{{item.count}}</td>
+                    <td class="tc red">{{item.loadTime|toFixed(true)}}</td>
+                    <td class="tc red">{{item.whiteTime|toFixed}}</td>
+                    <td class="tc">{{item.resourceTime|toFixed(true)}}</td>
+                    <td class="tc">{{item.domTime|toFixed(true)}}</td>
+                    <td class="tc">{{item.analysisDomTime|toFixed(true)}}</td>
+                    <td class="tc">{{item.dnsTime|toFixed}}</td>
+                    <td class="tc">{{item.tcpTime|toFixed}}</td>
+                    <td class="tc">{{item.redirectTime|toFixed}}</td>
+                    <td class="tc">{{item.unloadTime|toFixed}}</td>
+                    <td class="tc">{{item.requestTime|toFixed}}</td>
+                    <td class="tc">{{item.readyTime|toFixed}}</td>
+                </tr>
+            </table>
+        </div>
+        <div v-if="!isLoadend" class="loading-block"></div>
+    </div>
+    <!--  分页 -->
+    <div class="tc common_page_style" v-show="isLoadend&&listdata.length">
+        <div id="copot-page" class="copot-page"></div>
+    </div>
+    <!-- 暂无数据 -->
+    <div class="tc" v-if="!listdata.length">暂无数据!</div>
+</div>
+<script src="/js/Page.js"></script>
+<script src="/js/view-pages.js"></script>

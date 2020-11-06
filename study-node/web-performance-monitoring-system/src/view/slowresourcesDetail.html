@@ -1,0 +1,66 @@
+<%- include("./header.html") %>
+<%- include("./side.html") %>
+<!-- 样式 -->
+<link rel="stylesheet" href="/css/page.css">
+<link rel="stylesheet" href="/css/ajax-detail.css">
+<div class="container ajax mb150" id="pagesDetail" v-cloak>
+   <div class="common-title">
+        <h1 class="common-nav"><a href="/home/">首页</a>/<a href="/ajax/">列表</a>/慢资源详情</h1>
+        <commonsearch :done="getAjaxListForName"></commonsearch>
+    </div>
+    <div class="common_table_nav">
+        <li class="active">性能详情</li>
+    </div>
+    <!-- 页面平均耗时说明 -->
+    <div class="block-time" v-show="table==1">
+        <li class="li1">
+            <h1>慢资源响应平均耗时</h1>
+            <h2 class="red">{{pagesItemData.duration|toFixed}}</h2>
+        </li>
+        <li class="li2">
+            <h1>调用量</h1>
+            <h2>{{pagesItemData.count}}次</h2>
+        </li>
+        <li class="li3">
+            <h1>bodySize</h1>
+            <h2>{{pagesItemData.decodedBodySize|toSize}}</h2>
+        </li>
+    </div>
+    <!-- page详情性能列表 -->
+    <div class="common-head-title" v-show="table==1">
+        <h1>资源性能详情</h1> 
+        <div v-show="listdata.length">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="break-word">资源URL</th>
+                        <th>请求方式</th>
+                        <th>请求耗时</th>
+                        <th>返回资源大小</th>
+                        <th>请求参数</th>
+                        <th>请求时间</th>
+                        <th>调用页面</th>
+                    </tr>
+                </thead>
+                <tr v-for="(item,index) in listdata" :key="index">
+                    <td >{{item.name}}</td>
+                    <td class="tc">{{item.method}}</td>
+                    <td class="tc red">{{item.duration}}</td>
+                    <td class="tc">{{item.decodedBodySize|toSize}}</td>
+                    <td>{{item.querydata}}</td>
+                    <td class="tc">{{item.createTime|date('/',true)}}</td>
+                    <td :title="item.callUrl">{{item.callUrl|limitTo(50)}}</td>
+                </tr>
+            </table>
+        </div>
+        <div v-if="!isLoadend" class="loading-block"></div>
+        <!--  分页 -->
+        <div class="tc common_page_style" v-show="isLoadend&&listdata.length">
+            <div id="copot-page-pages" class="copot-page"></div>
+        </div>
+        <!-- 暂无数据 -->
+        <div class="tc" v-if="!listdata.length">暂无数据!</div>
+    </div>
+</div>
+<script src="/js/Page.js"></script>
+<script src="/js/view-slowresources-detail.js"></script>

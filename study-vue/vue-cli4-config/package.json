@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
+    "start": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "crm": "vue-cli-service build --mode crm",
     "font": "node scripts/svg2font.js",

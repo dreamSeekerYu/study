@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.js"></script>
+</head>
+
+<body>
+    <button onclick="upload()">点击上报</button>
+    <script>
+        const service = axios.create({
+            baseURL: 'http://10.99.32.31:7002', // url = base url + request url
+            // withCredentials: true, // send cookies when cross-domain requests
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        service.interceptors.request.use(
+            config => {
+                // if (config.data) {
+                //   config.data = formatParams(config.data)
+                // }
+                if (config.params) {
+                    config.data = formatParams(config.params)
+                    console.log(config.data)
+                }
+                return config
+            },
+            error => {
+                return Promise.reject(error)
+            }
+        )
+        function formatParams(params) {
+            params && Object.keys(params).forEach(key => {
+                if (typeof params[key] === 'string') {
+                    params[key] = params[key].trim()
+                } else if (typeof params[key] === 'object') {
+                    // formatParams(params[key])
+                    params[key] = JSON.stringify(params[key])
+                }
+            })
+            return params
+        }
+
+        function getTiming() {
+            let times = {};
+            let t = window.performance.timing;
+            // 优先使用 navigation v2  https://www.w3.org/TR/navigation-timing-2/
+            if (typeof window.PerformanceNavigationTiming === 'function') {
+                try {
+                    var nt2Timing = performance.getEntriesByType('navigation')[0]
+                    if (nt2Timing) {
+                        t = nt2Timing
+                    }
+                } catch (err) { }
+            }
+
+            //重定向时间
+            times.redirectTime = t.redirectEnd - t.redirectStart;
+
+            //dns 查询耗时
+            times.dnsTime = t.domainLookupEnd - t.domainLookupStart;
+
+            //TTFB 读取页面第一个字节的时间
+            times.ttfbTime = t.responseStart - t.navigationStart;
+
+            //DNS 缓存时间
+            times.appcacheTime = t.domainLookupStart - t.fetchStart;
+
+            //卸载页面的时间
+            times.unloadTime = t.unloadEventEnd - t.unloadEventStart;
+
+            //tcp 连接耗时
+            times.tcpTime = t.connectEnd - t.connectStart;
+
+            //request 请求耗时
+            times.reqTime = t.responseEnd - t.responseStart;
+
+            //解析 dom 树耗时
+            times.analysisTime = t.domComplete - t.domInteractive;
+
+            //白屏时间 
+            times.blankTime = (t.domInteractive || t.domLoading) - t.fetchStart;
+
+            //domReadyTime
+            times.domReadyTime = t.domContentLoadedEventEnd - t.fetchStart;
+            // unit
+            times.unit = "ms/毫秒"
+
+            console.log('%c res....', 'color: red; font-style: italic', JSON.stringify(times, null, 2))
+
+            return times
+        }
+        const obj = {
+                uploadTime: new Date().getTime(),
+                performance,
+                navigator: navigator.userAgent,
+                loadedErr: ['err1', 'err2'],
+                getTiming: getTiming()
+            }
+        function upload() {
+           
+            service({
+                url: '/api/uploadPerformanceData',
+                method: 'get',
+                params: obj
+            })
+                .then(function (response) {
+                    console.log(response.data.queryObject);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
+
+        window.addEventListener('unload', logData, false);
+        window.addEventListener('load', logData, false);
+
+        function logData() {
+            const formData = new FormData();
+            const data = {
+                ...obj
+            }
+            console.log(data)
+            Object.keys(data).forEach((key) => {
+                let value = data[key];
+                if (typeof value !== 'string') {
+                    // formData只能append string 或 Blob
+                    value = JSON.stringify(value);
+                }
+                formData.append(key, value);
+            });
+            navigator.sendBeacon("http://10.99.32.31:7002/api/uploadPerformanceData?a=1", formData);
+            // navigator.sendBeacon   等同于 post 的方式  可以发送 Formdata类型  
+            // 参考 https://blog.csdn.net/u012193330/article/details/102778979
+            // upload()
+        }
+        // 错误上报
+    </script>
+</body>
+
+</html>

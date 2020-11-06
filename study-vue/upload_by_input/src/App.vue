@@ -2,6 +2,7 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link>|
+      <router-link to="/class-component">class-component</router-link>|
       <router-link to="/about">About</router-link>|
       <router-link to="/upload_video_by_input"
         >upload_video_by_input</router-link

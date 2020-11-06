@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    mark {
+      background-color: green;
+      color: #FFFFFF;
+    }
+  </style>
+</head>
+
+<body>
+  <h4>纯 H5 效果</h4>
+
+  展开收起
+  <details>
+    <summary>Click Here to get the user details</summary>
+    <table>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Location</th>
+        <th>Job</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>Adam</td>
+        <td>Huston</td>
+        <td>UI/UX</td>
+      </tr>
+    </table>
+  </details>
+
+  <hr>
+  高亮标记
+  <p> Did you know, you can <mark>"Highlight something interesting"</mark> just with an HTML tag? </p>
+
+  <hr>
+
+  自动计算并显示结果
+  <form oninput="x.value=parseInt(a.value) * parseInt(b.value)">
+    <input type="number" id="a" value="0">
+    * <input type="number" id="b" value="0">
+    = <output name="x" for="a b"></output>
+  </form>
+
+  <hr>
+
+  输入并且下拉选择
+  <form action="" method="get">
+    <label for="fruit">Choose your fruit from the list:</label>
+    <input list="fruits" name="fruit" id="fruit">
+    <datalist id="fruits">
+      <option value="Apple">
+      <option value="Orange">
+      <option value="Banana">
+      <option value="Mango">
+      <option value="Avacado">
+    </datalist>
+    <input type="submit">
+  </form>
+
+  <hr>
+
+  进度条
+  <form oninput="x.value=range.value">
+    <input type="range" id="range" name="range" min="0" max="100" step="1" value="" onchange="changeValue(event)" />
+    <output name="x" for="range"></output>
+  </form>
+
+
+
+  <hr>
+
+  自动计算比例
+  <label for="home">/home/atapas
+    <meter id="home" value="40" min="0" max="100">2 out of 10</meter>
+  </label>
+
+  <br>
+  <label for="root">/root
+    <meter id="root" value="0.3">90%</meter>
+  </label>
+
+  <hr>
+
+  进度条
+  <label for="file">Downloading progress:</label>
+  <progress id="file" value="32" max="100"> 32% </progress>
+
+</body>
+
+</html>

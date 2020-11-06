@@ -1,0 +1,155 @@
+<%- include("./header.html") %>
+<%- include("./side.html") %>
+<!-- 样式 -->
+<link rel="stylesheet" href="/css/webpagetest.css">
+<div class="container" class="addSystem mb150" id="webpagetest" v-cloak>
+    <div class="common-title">
+        <h1 class="common-nav"><a href="/home/">首页</a>/<a href="/webpagetest/">页面性能测评</a></h1>
+    </div>
+    <div class="main-content">
+        <div class="url">
+            <input class="fl" type="text" v-model.trim="weburl" placeholder="输入一个链接地址">
+            <button class="fl" @click="biginTest">开始测评</button>
+            <div class="loading fl" v-show="isLoading"><img src="/images/common/loading-2.gif">测评中...</div>
+        </div>
+        <div class="h1">设置条件</div>
+        <div class="seeting">
+            <div class="select">
+                <span class="s1">选择设备：</span>
+                <span class="select">
+                    <select v-model="screentype">
+                        <option value="0">PC端</option>
+                        <option value="1">iPhone5</option>
+                        <option value="2">iPhone系列</option>
+                        <option value="3">iPhone Plus系列</option>
+                        <option value="4">iPhone X</option>
+                    </select>
+                </span>
+            </div>
+            <div class="tianchong">
+                <div class="item">
+                    <span>屏幕宽度：</span>
+                    <input placeholder="输入屏幕宽度" v-model.trim="screenWidth" type="text">
+                </div>
+                <div class="item">
+                    <span>屏幕高度：</span>
+                    <input placeholder="输入屏幕高度" v-model.trim="screenHeight" type="text">
+                </div>
+            </div>
+        </div>
+        <div class="result" >
+            <div class="h1 h1-1">测评结果</div>
+            <!-- 页面平均耗时说明 -->
+            <div class="block-time">
+                <li class="li1">
+                    <h1>页面总响应耗时</h1>
+                    <h2 class="red">{{pageTotalTime|toFixed(true)}}</h2>
+                </li>
+                <li class="li3">
+                    <h1>页面返回大小</h1>
+                    <h2>{{pageTotalsize|toSize(true)}}</h2>
+                </li>
+                <li class="li2">
+                    <h1>请求资源数量</h1>
+                    <h2 class="red">{{allData.length}}</h2>
+                </li>
+                <li class="li3">
+                    <h1>所有资源返回大小</h1>
+                    <h2>{{bodySizeSize|toSize}}</h2>
+                </li>
+            </div>
+            <!-- 资源请求列表 -->
+            <div class="sources-list">
+                <h1 class="h1">页面资源请求详情信息</h1>
+                <div class="sources-tab">
+                    <ul class="clearfix">
+                        <li :class="className == 'allData'?'actives':''" @click="setdata('allData')">ALL</li>
+                        <li :class="className == 'XHRData'?'actives':''" @click="setdata('XHRData')">XHR</li>
+                        <li :class="className == 'JSData'?'actives':''" @click="setdata('JSData')">JS</li>
+                        <li :class="className == 'CSSData'?'actives':''" @click="setdata('CSSData')">CSS</li>
+                        <li :class="className == 'IMGData'?'actives':''" @click="setdata('IMGData')">IMG</li>
+                        <li :class="className == 'OtherData'?'actives':''" @click="setdata('OtherData')">Other</li>
+                    </ul>
+                </div>
+                <div class="sources-contai">
+                    <table class="tab table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    
+                                </th>
+                                <th class="tc" width="15%">资源名称</th>
+                                <th class="tc" width="7.5%">资源状态码</th>
+                                <th class="tc" width="7.5%">资源大小</th>
+                                <th class="tc" width="70%" id="thbox">资源耗时</th>
+                            </tr>
+                        </thead>
+                        <tbody v-for="(item,index) in listdata.entries" :key="index">
+                            <tr class="sliders cursor"  @click="showtr(item,index)">
+                                <td class="cursor">
+                                    <i class="iconfont" v-show="item.shows" >&#xe668;</i>
+                                    <i class="iconfont" v-show="!item.shows" >&#xe61f;</i>
+                                </td>
+                                <td class="tc"><p class="source-abso-tit" :title="item.request.url">{{item.pathname}}</p></td>
+                                <td class="tc">{{item.response.status}}</td>
+                                <td class="tc">{{item.response.bodySize | toSize}}</td>
+                                <td class="tc">
+                                    <div class="sources-table">
+                                        <span :style="{width:item.waitwidth+'px',left:item.lefts+'px'}" class="spans"></span>
+                                        <label :style="{width:item.timewidth+'px',left:item.lefts+'px'}" class="labels">
+                                        </label>
+                                        <i class='fonts' :style="{left:item.lefts+10+'px'}">{{item.timings.wait+item.timings.time}}ms</i>
+                                        <div :style="{width:item.lefts+item.timewidth+50+'px',left:item.boxleft+'px'}" class="sourec-list">
+                                            <div class="source-absolute" :style="{bottom:item.boxtop+'px'}">
+                                                <p class="source-abso-tit">{{item.requestStartTime}}ms</p>
+                                                <ul>
+                                                    <li>
+                                                        <span class="source-abso-span"></span><label class="source-abso-label">资源等待时间：{{item.timings.wait}}ms</label>
+                                                    </li>
+                                                    <li>
+                                                        <span class="source-abso-span two"></span><label class="source-abso-label">资源加载时间：{{item.timings.time}}ms</label>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="5">
+                                    <div class="showtr_box" v-show="item.shows">
+                                        <dl>
+                                            <dt>request Header</dt>
+                                            <dd>
+                                                <p v-for="(item1,index1) in item.request.headers" :key="index1">
+                                                <span>{{item1.name}}</span>：
+                                                <label>{{item1.value}}</label>
+                                            </p>
+                                            </dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>response Header</dt>
+                                            <dd>
+                                                <p v-for="(item2,index2) in item.response.headers" :key="index2">
+                                                <span>{{item2.name}}</span>：
+                                                <label>{{item2.value}}</label>
+                                                </p>
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="sources-botfont">
+                    <span>共{{allData.length}}个资源</span>
+                    <span>资源共{{bodySizeSize|toSize}}</span>
+                    <label>总耗时：{{pageTotalTime|toFixed(true)}}</label>
+                </div>
+                <li ></li>
+            </div> 
+        </div>  
+    </div>   
+</div>
+<script src="/js/view-webpagetest.js"></script>

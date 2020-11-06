@@ -1,0 +1,53 @@
+<%- include("./header.html") %>
+<!-- 样式 -->
+<link rel="stylesheet" href="/css/index.css">
+<div class="container system" id="index" v-cloak>
+	<div class="common-title">
+        <h1>应用列表</h1>
+        <commonsearch></commonsearch>
+    </div>
+    <div class="list">
+        <table class="table" v-if="datalist.length">
+            <tr class="head">
+                <th>应用名称</th>
+                <th>应用链接</th>
+                <th class='w-350'>appId</th>
+                <th>页面加载阀值</th>
+                <th>JS资源阀值</th>
+                <th>CSS资源阀值</th>
+                <th>IMG资源阀值</th>
+                <th>AJAX加载阀值</th>
+                <th>是否统计项目</th>
+                <th>是否统计页面</th>
+                <th>是否统计AJAX</th>
+                <th>是否统计页面资源</th>
+                <th>是否统计用户系统信息</th>
+                <th>是否统计错误信息</th>
+                <th>操作</th>
+            </tr>
+            <tr class="body" v-for="item in datalist">
+                <td><a href="javascript:" @click="getDetail(item)">{{item.systemName}}</a></td>
+                <td>{{item.systemDomain}}</td>
+                <td>{{item.appId}}</td>
+                <td>{{item.slowPageTime+'s'}}</td>
+                <td>{{item.slowJsTime+'s'}}</td>
+                <td>{{item.slowCssTime+'s'}}</td>
+                <td>{{item.slowImgTime+'s'}}</td>
+                <td>{{item.slowAajxTime+'s'}}</td>
+                <td>{{item.isUse?'否':'是'}}</td>
+                <td>{{item.isStatisiPages?'否':'是'}}</td>
+                <td>{{item.isStatisiAjax?'否':'是'}}</td>
+                <td>{{item.isStatisiResource?'否':'是'}}</td>
+                <td>{{item.isStatisiSystem?'否':'是'}}</td>
+                <td>{{item.isStatisiError?'否':'是'}}</td>
+                 <td>
+                    <a href="javascript:" @click="goToSeeting(item)">设置</a>
+                    <!-- <span class="active">删除</span> -->
+                    <a href="javascript:" @click="getDetail(item)">详情</a>
+                </td>
+            </tr>
+        </table>
+        <div class="mt30 tc" v-if="!datalist.length">暂无应用，去添加一个吧</div>
+    </div>
+</div>
+<script src="/js/view-system.js"></script>

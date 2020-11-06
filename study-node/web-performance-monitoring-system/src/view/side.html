@@ -1,0 +1,51 @@
+<div class="side">
+	<div class="top">
+        <span class="text fl">启明星分销项目</span> 
+    </div>
+    <div class="side-main">
+        <ul id="side-main-nav">
+            <!-- <li data-mark="error">
+                <a href="/error"><img src="/images/common/icon-1.png"> <span>脚本错误</span></a>
+            </li> -->
+            <li data-mark="zane">
+                <a href="/pages?type=zane"><span class="iconfont">&#xe7cc;</span> <span>访问页面</span></a>
+            </li>
+            <li data-mark="error">
+                <a href="/error"><span class="iconfont">&#xe627;</span> <span>脚本错误</span></a>
+            </li>
+            <li data-mark="ajax">
+                <a href="/ajax"><span class="iconfont">&#xe698;</span> <span>AJAX性能</span></a>
+            </li>
+            <li data-mark="slow">
+                <a href="/pages?type=slow"><span class="iconfont">&#xe651;</span> <span>慢页面追踪</span></a>
+            </li>
+            <li data-mark="slowresources">
+                <a href="/slowresources"><span class="iconfont">&#xe7cc;</span> <span>慢资源追踪</span></a>
+            </li>
+            <li data-mark="httptest">
+                <a href="/httptest"><span class="iconfont">&#xe74a;</span> <span>接口性能</span></a>
+            </li>
+            <li data-mark="webpagetest">
+                <a href="/webpagetest"><span class="iconfont">&#xe7cc;</span> <span>页面性能</span></a>
+            </li>
+            <li data-mark="setting">
+                <a href="/setting"><span class="iconfont">&#xe662;</span> <span>系统设置</span></a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var href = location.href;
+    var liobjs = $('#side-main-nav').find('li')
+    for(var i=0,len=liobjs.length;i<len;i++){
+        var attrr = $(liobjs[i]).attr('data-mark')
+        if(href.indexOf(attrr)!= -1){
+            liobjs.removeClass('active')
+            $(liobjs[i]).addClass('active')
+        }
+    }
+</script>
+
+
+
